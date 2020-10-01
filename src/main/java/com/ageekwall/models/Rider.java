@@ -4,6 +4,6 @@ import lombok.Data;
 @Data
 public class Rider {
     private String name;
-    private String cabId;
+    private String riderId;
 
 }
