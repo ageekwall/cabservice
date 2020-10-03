@@ -5,5 +5,8 @@ import lombok.Data;
 @Data
 public class Cab {
     private String cabDriver;
-    private String cabId;
+    private int cabId;
+    private int x;
+    private int y;
+    private boolean available;
 }
