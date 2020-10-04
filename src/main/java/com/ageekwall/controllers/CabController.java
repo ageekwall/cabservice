@@ -5,6 +5,7 @@ import com.ageekwall.database.RiderManager;
 import com.ageekwall.database.TripManager;
 import com.ageekwall.models.Cab;
 import com.ageekwall.models.Rider;
+import com.ageekwall.models.Trip;
 import com.ageekwall.service.RequestHandler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +18,8 @@ import java.util.List;
 @RestController
 public class CabController {
 
-    CabManager cabManager;
-    TripManager tripManager;
+    private CabManager cabManager;
+    private TripManager tripManager;
 
     public CabController(CabManager cabManager, TripManager tripManager) {
         this.cabManager = cabManager;
@@ -41,12 +42,14 @@ public class CabController {
     @RequestMapping(value = "cab/update/availablity", method = RequestMethod.POST)
     public ResponseEntity updateCabAvailability(final int cabId, final String flag) {
         cabManager.switchAvailability(cabId, flag);
+        return ResponseEntity.ok("");
     }
 
     @RequestMapping(value = "cab/endtrip", method = RequestMethod.POST)
     public ResponseEntity endTrip(final int cabId) {
-
-        tripManager.endTrip(cabId);
+        Trip currentTrip = tripManager.getCurrentTrip(cabId);
+        tripManager.endTrip(currentTrip);
+        return ResponseEntity.ok("");
     }
 
 

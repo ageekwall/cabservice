@@ -4,12 +4,18 @@ import com.ageekwall.models.Rider;
 import com.ageekwall.models.Trip;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RiderManager {
-    List<Rider> riders = new ArrayList<>();
+    Map<Integer, Rider> riders = new HashMap<>();
     public void createRider(Rider rider) {
-        riders.add(rider);
+        riders.put(rider.getRiderId(), rider);
+    }
+
+    public Rider getRider(int riderId) {
+        return riders.get(riderId);
     }
 
 

@@ -15,18 +15,25 @@ public class TripManager {
     //local database of available cabs, it has to be made atomic
     Map<Integer, List<Trip>> rides = new HashMap<>();
     Map<Integer, Trip> currentRides = new HashMap<>();
-    public void newTrip(Trip trip) {
-        currentRides.put(trip.getRiderId(), trip);
+
+    public void newTrip(Rider rider, int srcx, int srcy, int destx, int desty) {
+
+        currentRides.put(trip.getCabId(), trip);
     }
 
     public void endTrip(Trip trip) {
         int riderId = trip.getRiderId();
+        currentRides.remove(trip.getCabId());
         List<Trip> trips = rides.getOrDefault(riderId, new ArrayList<>());
         trips.add(trip);
     }
 
-    public List<Trip> getRides(Rider rider) {
-        return rides.get(rider.getRiderId());
+    public List<Trip> getRides(int riderId) {
+        return rides.get(riderId);
+    }
+
+    public Trip getCurrentTrip(int cabID) {
+        return currentRides.get(cabID);
     }
 
 
